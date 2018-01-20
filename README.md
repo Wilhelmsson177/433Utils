@@ -37,13 +37,13 @@ After that you can compile the example programs by executing *make*.
 ## Usage
 
 ### send 
-```sudo ./send systemCode unitCode command```
+```sudo ./send systemCode unitCode command [wiringPiPin]```
 
 This command is unaltered from the original rc\_switch distribution.
 
 
 ### codesend 
-```sudo ./codesend decimalcode```
+```sudo ./codesend decimalcode [protocol] [pulselength] [wiringPiPin]```
 
 This command uses a single Ninja Blocks compatible decimal code.  Sniff out codes using the RF\_Sniffer.ino Arduino sketch, included in this distribution.
 
