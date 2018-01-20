@@ -1,11 +1,11 @@
 /*
-Usage: ./codesend decimalcode [protocol] [pulselength]
+Usage: ./codesend decimalcode [protocol] [pulselength] [wiringPiPin]
 decimalcode - As decoded by RFSniffer
 protocol    - According to rc-switch definitions
 pulselength - pulselength in microseconds
 
  'codesend' hacked from 'send' by @justy
- 
+
  - The provided rc_switch 'send' command uses the form systemCode, unitCode, command
    which is not suitable for our purposes.  Instead, we call 
    send(code, length); // where length is always 24 and code is simply the code
@@ -25,7 +25,8 @@ int main(int argc, char *argv[]) {
     // Consult https://projects.drogon.net/raspberry-pi/wiringpi/pins/
     // for more information.
     int PIN = 0;
-    
+    if (argv[3] != NULL) PIN = atoi(argv[3]);
+
     // Parse the first parameter to this command as an integer
     int protocol = 0; // A value of 0 will use rc-switch's default value
     int pulseLength = 0;
@@ -50,9 +51,8 @@ int main(int argc, char *argv[]) {
     if (protocol != 0) mySwitch.setProtocol(protocol);
     if (pulseLength != 0) mySwitch.setPulseLength(pulseLength);
     mySwitch.enableTransmit(PIN);
-    
-    mySwitch.send(code, 24);
-    
-    return 0;
 
+    mySwitch.send(code, 24);
+
+    return 0;
 }
